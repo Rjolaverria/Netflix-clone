@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Input, Button, Text } from './styles/opt-form';
+import { Container, Input, Button, Text } from './styles';
 
 const OptForm = ({ children, ...restProps }) => (
     <Container {...restProps}>{children}</Container>

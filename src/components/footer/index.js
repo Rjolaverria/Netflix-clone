@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    Container,
-    Row,
-    Column,
-    Link,
-    Title,
-    Text,
-    Break,
-} from './styles/footer';
+import { Container, Row, Column, Link, Title, Text, Break } from './styles';
 
 const Footer = ({ children, ...restProps }) => (
     <Container {...restProps}>{children}</Container>

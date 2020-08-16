@@ -1,12 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import {
-    Container,
-    Inner,
-    Item,
-    Header,
-    Title,
-    Body,
-} from './styles/accordion';
+import { Container, Inner, Item, Header, Title, Body } from './styles';
 
 const ToggleContext = createContext();
 
