@@ -28,9 +28,16 @@ Accordion.Item = ({ children, ...restProps }) => (
 
 Accordion.Header = function AccordionHeader({ children, index, ...restProps }) {
     const { activeIndex, setActiveIndex } = useContext(ToggleContext);
+    const handleClick = () => {
+        if (activeIndex === index) {
+            setActiveIndex(null);
+        } else {
+            setActiveIndex(index);
+        }
+    };
 
     return (
-        <Header onClick={() => setActiveIndex(index)} {...restProps}>
+        <Header onClick={handleClick} {...restProps}>
             {children}
             {activeIndex === index ? (
                 <img src='/images/icons/close-slim.png' alt='Close' />

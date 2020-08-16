@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion } from '../components';
+import { Accordion, OptForm } from '../components';
 import data from '../fixtures/faqs.json';
 
 const FaqsContainer = () => (
@@ -11,6 +11,14 @@ const FaqsContainer = () => (
                 <Accordion.Body index={index}>{i.body}</Accordion.Body>
             </Accordion.Item>
         ))}
+        <OptForm>
+            <OptForm.Text>
+                Ready to watch? Enter your email to create or restart your
+                membership.
+            </OptForm.Text>
+            <OptForm.Input placeholder='Email Address' />
+            <OptForm.Button>Try 30 days free</OptForm.Button>
+        </OptForm>
     </Accordion>
 );
 
