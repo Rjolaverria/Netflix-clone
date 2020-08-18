@@ -9,7 +9,7 @@ export const Background = styled.div`
     flex-direction: column;
     background: linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.4) 0,
+            rgba(0, 0, 0, 0.2) 0,
             rgba(0, 0, 0, 0) 60%,
             rgba(0, 0, 0, 0.4) 100%
         ),
@@ -19,7 +19,7 @@ export const Background = styled.div`
     }
 `;
 
-export const Container = styled.section`
+export const Container = styled.div`
     padding: 70px 45px;
     border-bottom: 8px solid #222;
 `;
@@ -46,7 +46,7 @@ export const Logo = styled.img`
     width: 108px;
     margin-right: 2.5rem;
 
-    @media (min-width: 1449px) {
+    @media (max-width: 1449px) {
         height: 45px;
         width: 167px;
     }
