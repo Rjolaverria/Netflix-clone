@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import GlobalStyles from './global-styles';
 import App from './App';
+import FirebaseContext from './context/firebase';
+import firebaseConfig from './firebaseConfig';
 import * as serviceWorker from './serviceWorker';
+
+const firebase = window.firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
     <React.StrictMode>
-        <GlobalStyles />
-        <App />
+        <FirebaseContext.Provider value={{ firebase: window.firebase }}>
+            <GlobalStyles />
+            <App />
+        </FirebaseContext.Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
