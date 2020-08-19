@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import FooterContainer from '../containers/FooterContainer';
 import { Header, Form } from '../components';
+import { SIGN_IN } from '../constants/routes';
 
-import { SIGN_UP } from '../constants/routes';
-
-const SignIn = () => {
+const SignUp = () => {
     const [error, setError] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignin = (e) => e.preventDefault();
+    const handleSignUp = (e) => e.preventDefault();
 
     return (
         <>
@@ -22,9 +22,14 @@ const SignIn = () => {
                     />
                 </Header.Frame>
                 <Form>
-                    <Form.Frame onSubmit={handleSignin}>
-                        <Form.Title>Sign In</Form.Title>
+                    <Form.Frame onSubmit={handleSignUp}>
+                        <Form.Title>Sign Up</Form.Title>
                         {error && <Form.Error>{error}</Form.Error>}
+                        <Form.Input
+                            value={name}
+                            placeholder='Full Name'
+                            onChange={({ target }) => setName(target.value)}
+                        />
                         <Form.Input
                             type='email'
                             value={email}
@@ -39,15 +44,15 @@ const SignIn = () => {
                             onChange={({ target }) => setPassword(target.value)}
                         />
                         <Form.Submit
-                            disabled={!password | !email}
+                            disabled={!password || !email || !name}
                             type='submit'
                         >
-                            Sign In
+                            Sign Up
                         </Form.Submit>
 
                         <Form.Text>
-                            New to Netflix?{' '}
-                            <Form.Link to={SIGN_UP}>Sign up now</Form.Link>.
+                            Already have an account?{' '}
+                            <Form.Link to={SIGN_IN}>Sign In</Form.Link>.
                         </Form.Text>
                         <Form.Disclaimer>
                             This page is protected by Google reCAPTCHA to ensure
@@ -61,4 +66,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;

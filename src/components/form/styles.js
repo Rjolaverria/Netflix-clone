@@ -28,7 +28,7 @@ export const Text = styled.p`
     font-weight: 500;
 `;
 
-export const SmallText = styled.p`
+export const Disclaimer = styled.p`
     margin-top: 0.625rem;
     font-size: 0.8125rem;
     line-height: normal;

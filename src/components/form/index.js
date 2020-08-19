@@ -4,7 +4,7 @@ import {
     Frame,
     Title,
     Text,
-    SmallText,
+    Disclaimer,
     Error,
     Link,
     Input,
@@ -27,8 +27,8 @@ Form.Text = ({ children, ...restProps }) => (
     <Text {...restProps}>{children}</Text>
 );
 
-Form.SmallText = ({ children, ...restProps }) => (
-    <SmallText {...restProps}>{children}</SmallText>
+Form.Disclaimer = ({ children, ...restProps }) => (
+    <Disclaimer {...restProps}>{children}</Disclaimer>
 );
 
 Form.Link = ({ children, ...restProps }) => (

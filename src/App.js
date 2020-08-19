@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { HOME, SIGN_IN, SIGN_UP, BROWSE } from './constants/routes';
-import { Route } from 'react-router-dom';
 
-import { Home, Signin } from './pages';
+import { Home, SignIn, SignUp, Browse } from './pages';
 
 const App = () => {
     return (
@@ -13,13 +12,13 @@ const App = () => {
                     <Home />
                 </Route>
                 <Route path={SIGN_IN}>
-                    <Signin />
+                    <SignIn />
                 </Route>
                 <Route path={SIGN_UP}>
-                    <p>I will be the sign up page</p>
+                    <SignUp />
                 </Route>
                 <Route path={BROWSE}>
-                    <p>I will be the browse page</p>
+                    <Browse />
                 </Route>
             </Switch>
         </Router>
