@@ -75,7 +75,7 @@ const SignIn = () => {
                     </Form.Frame>
                 </Form>
             </Header>
-            <FooterContainer />
+            <FooterContainer small />
         </>
     );
 };

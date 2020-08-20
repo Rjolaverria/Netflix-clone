@@ -15,7 +15,7 @@ export const Background = styled.div`
         ),
         url(${({ src }) => backgroundHelper(src)}) top left / cover no-repeat;
     @media (max-width: 1100px) {
-        ${({ smallViewPort }) => smallViewPort && `background: none;`}
+        ${({ smallViewPortHide }) => smallViewPortHide && `background: none;`}
     }
 `;
 
@@ -84,5 +84,54 @@ export const ButtonLink = styled(RouterLink)`
 
     &:hover {
         background: #f40612;
+    }
+`;
+
+export const Group = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const Text = styled.p`
+    color: white;
+    font-size: 1.375rem;
+    line-height: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+`;
+
+export const Feature = styled(Frame)`
+    padding: 150px 0 500px 0;
+    flex-direction: column;
+    align-items: normal;
+    width: 50%;
+
+    @media (max-width: 1100px) {
+        display: none;
+    }
+`;
+
+export const FeatureHeading = styled.h2`
+    color: #fff;
+    font-size: 3.125rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+    margin: 0;
+`;
+
+export const PlayButton = styled.button`
+    box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
+    background-color: #e6e6e6;
+    border: 0;
+    padding: 0.625rem 1.25rem;
+    border-radius: 4px;
+    max-width: 130px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 0.625rem;
+    cursor: pointer;
+    transition: background 0.6s ease;
+
+    &:hover {
+        background: #ff1e1e;
+        color: white;
     }
 `;

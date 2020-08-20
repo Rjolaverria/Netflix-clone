@@ -88,7 +88,7 @@ const SignUp = () => {
                     </Form.Frame>
                 </Form>
             </Header>
-            <FooterContainer />
+            <FooterContainer small />
         </>
     );
 };
