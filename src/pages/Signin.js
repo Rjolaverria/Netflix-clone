@@ -1,15 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import FirebaseContext from '../context/firebase';
 import FooterContainer from '../containers/FooterContainer';
 import { Header, Form } from '../components';
 
-import { SIGN_UP } from '../constants/routes';
+import { SIGN_UP, BROWSE } from '../constants/routes';
 
 const SignIn = () => {
+    const history = useHistory();
+    const { firebase } = useContext(FirebaseContext);
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignin = (e) => e.preventDefault();
+    const handleSignin = (e) => {
+        e.preventDefault();
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                setEmail('');
+                setPassword('');
+                setError('');
+                history.push(BROWSE);
+            })
+            .catch((error) => {
+                setError(error.message);
+                setTimeout(() => setError(''), 5000);
+            });
+    };
 
     return (
         <>

@@ -1,15 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import FirebaseContext from '../context/firebase';
 import FooterContainer from '../containers/FooterContainer';
 import { Header, Form } from '../components';
-import { SIGN_IN } from '../constants/routes';
+import { SIGN_IN, BROWSE } from '../constants/routes';
 
 const SignUp = () => {
+    const history = useHistory();
+    const { firebase } = useContext(FirebaseContext);
     const [error, setError] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignUp = (e) => e.preventDefault();
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((result) =>
+                result.user
+                    .updateProfile({
+                        displayName: name,
+                        photoURL: Math.floor(Math.random() * 5) + 1,
+                    })
+                    .then(() => {
+                        setEmail('');
+                        setPassword('');
+                        setError('');
+                        history.push(BROWSE);
+                    })
+            )
+            .catch((error) => {
+                setError(error.message);
+                setTimeout(() => setError(''), 5000);
+            });
+    };
 
     return (
         <>
