@@ -24,10 +24,13 @@ export const Container = styled.div`
     border-bottom: 8px solid #222;
 `;
 
-export const Frame = styled.div`
+export const Group = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
+`;
+
+export const Frame = styled(Group)`
+    justify-content: space-between;
     height: 4rem;
     margin: 0 3.5rem;
     padding: 1.125rem 0 0 0;
@@ -87,13 +90,8 @@ export const ButtonLink = styled(RouterLink)`
     }
 `;
 
-export const Group = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
 export const Text = styled.p`
-    color: white;
+    color: #fff;
     font-size: 1.375rem;
     line-height: normal;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
@@ -128,10 +126,97 @@ export const PlayButton = styled.button`
     font-size: 1.25rem;
     margin-top: 0.625rem;
     cursor: pointer;
-    transition: background 0.6s ease;
+    transition: background 0.5s ease;
 
     &:hover {
         background: #ff1e1e;
-        color: white;
+        color: #fff;
+    }
+`;
+
+export const Search = styled(Group)`
+    @media (max-width: 700px) {
+        display: none;
+    }
+`;
+
+export const SearchIcon = styled.button`
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+
+    &:focus {
+        outline: 0;
+    }
+
+    img {
+        filter: brightness(0) invert(1);
+        width: 16px;
+    }
+`;
+
+export const SearchInput = styled.input`
+    background-color: #444459;
+    color: #fff;
+    border: 1px solid #fff;
+    transition: width 0.5s;
+    height: 30px;
+    font-size: 0.875rem;
+    margin-left: ${({ active }) => (active === true ? '.625rem' : '0')};
+    padding: ${({ active }) => (active === true ? '0 .625rem' : '0')};
+    opacity: ${({ active }) => (active === true ? '1' : '0')};
+    width: ${({ active }) => (active === true ? '200px' : '0px')};
+`;
+
+export const Picture = styled.button`
+    background: url(${({ src }) => src});
+    background-size: contain;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    &:focus {
+        outline: 0;
+    }
+`;
+
+export const Profile = styled(Group)`
+    margin-left: 1.25rem;
+    position: relative;
+
+    &:hover > div {
+        display: flex;
+        flex-direction: column;
+    }
+`;
+
+export const Dropdown = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #000;
+    top: 32px;
+    right: 1px;
+    width: 100px;
+    padding: 0.625rem;
+
+    ${Group} {
+        margin-bottom: 0.625rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        ${Link}, ${Picture} {
+            cursor: default;
+        }
+    }
+
+    ${Group}:last-of-type ${Link} {
+        cursor: pointer;
+    }
+
+    button {
+        margin-right: 0.625rem;
     }
 `;

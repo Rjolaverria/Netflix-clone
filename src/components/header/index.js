@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     Container,
@@ -12,6 +12,12 @@ import {
     Feature,
     FeatureHeading,
     PlayButton,
+    Search,
+    SearchIcon,
+    SearchInput,
+    Profile,
+    Dropdown,
+    Picture,
 } from './styles';
 
 const Header = ({ bg = true, children, ...restProps }) => {
@@ -36,6 +42,28 @@ Header.Logo = ({ to, ...restProps }) => (
     </RouterLink>
 );
 
+Header.Search = function HeaderSearch({
+    searchTerm,
+    setSearchTerm,
+    ...restProps
+}) {
+    const [active, setActive] = useState(false);
+
+    return (
+        <Search {...restProps}>
+            <SearchIcon onClick={() => setActive(!active)}>
+                <img src='/images/icons/search.png' alt='Search' />
+            </SearchIcon>
+            <SearchInput
+                value={searchTerm}
+                onChange={({ target }) => setSearchTerm(target.value)}
+                placeholder='Search files and series'
+                active={active}
+            />
+        </Search>
+    );
+};
+
 Header.Text = ({ children, ...restProps }) => (
     <Text {...restProps}>{children}</Text>
 );
@@ -58,6 +86,18 @@ Header.FeatureHeading = ({ children, ...restProps }) => (
 
 Header.PlayButton = ({ children, ...restProps }) => (
     <PlayButton {...restProps}>{children}</PlayButton>
+);
+
+Header.Profile = ({ children, ...restProps }) => (
+    <Profile {...restProps}>{children}</Profile>
+);
+
+Header.Picture = ({ src, ...restProps }) => (
+    <Picture {...restProps} src={`/images/users/${src}.png`} />
+);
+
+Header.Dropdown = ({ children, ...restProps }) => (
+    <Dropdown {...restProps}>{children}</Dropdown>
 );
 
 export default Header;

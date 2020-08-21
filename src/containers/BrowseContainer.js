@@ -10,13 +10,14 @@ const BrowseContainer = () => {
     const [category, setCategory] = useState('series');
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const user = {
         displayName: 'Karl',
         photoURL: '1',
     };
 
-    return user.displayName ? (
+    return profile.displayName ? (
         <>
             <Header src='joker1' smallViewPortHide>
                 <Header.Frame>
@@ -39,6 +40,32 @@ const BrowseContainer = () => {
                             Films
                         </Header.Link>
                     </Header.Group>
+                    <Header.Group>
+                        <Header.Search
+                            searchTerm={searchTerm}
+                            setSearchTerm={setSearchTerm}
+                        />
+                        <Header.Profile>
+                            <Header.Picture src={user.photoURL} />
+                            <Header.Dropdown>
+                                <Header.Group>
+                                    <Header.Picture src={user.photoURL} />
+                                    <Header.Link>
+                                        {user.displayName}
+                                    </Header.Link>
+                                </Header.Group>
+                                <Header.Group>
+                                    <Header.Link
+                                        onClick={() =>
+                                            firebase.auth().signOut()
+                                        }
+                                    >
+                                        SIgn Out
+                                    </Header.Link>
+                                </Header.Group>
+                            </Header.Dropdown>
+                        </Header.Profile>
+                    </Header.Group>
                 </Header.Frame>
 
                 <Header.Feature>
@@ -58,7 +85,7 @@ const BrowseContainer = () => {
             <FooterContainer />
         </>
     ) : (
-        <ProfileContainer />
+        <ProfileContainer user={user} setProfile={setProfile} />
     );
 };
 
