@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Header } from '../components';
+import React, { useState, useContext, useEffect } from 'react';
+import { Header, Loading } from '../components';
 import { HOME } from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import ProfileContainer from './ProfileContainer';
@@ -13,12 +13,23 @@ const BrowseContainer = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const user = {
-        displayName: 'Karl',
-        photoURL: '1',
+        displayName: 'Rafi',
+        photoURL: '2',
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
+    }, []);
 
     return profile.displayName ? (
         <>
+            {loading ? (
+                <Loading src={user.photoURL} />
+            ) : (
+                <Loading.ReleaseBody />
+            )}
             <Header src='joker1' smallViewPortHide>
                 <Header.Frame>
                     <Header.Group>
