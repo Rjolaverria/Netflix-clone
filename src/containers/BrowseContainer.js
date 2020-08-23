@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Header, Loading } from '../components';
+import { Header, Loading, Card } from '../components';
 import { HOME } from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import ProfileContainer from './ProfileContainer';
 import FooterContainer from './FooterContainer';
 
-const BrowseContainer = () => {
+const BrowseContainer = ({ data }) => {
     const { firebase } = useContext(FirebaseContext);
     const [category, setCategory] = useState('series');
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [dataRows, setDataRows] = useState([]);
 
     const user = {
         displayName: 'Rafi',
@@ -22,6 +23,10 @@ const BrowseContainer = () => {
             setLoading(false);
         }, 3000);
     }, []);
+
+    useEffect(() => {
+        setDataRows(data[category]);
+    }, [data, category]);
 
     return profile.displayName ? (
         <>
@@ -71,7 +76,7 @@ const BrowseContainer = () => {
                                             firebase.auth().signOut()
                                         }
                                     >
-                                        SIgn Out
+                                        Sign Out
                                     </Header.Link>
                                 </Header.Group>
                             </Header.Dropdown>
@@ -93,6 +98,33 @@ const BrowseContainer = () => {
                     <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+
+            <Card.Group>
+                {dataRows.map((dataItem) => (
+                    <Card key={`${category}-${dataItem.title.toLowerCase()}`}>
+                        <Card.Title>{dataItem.title}</Card.Title>
+                        <Card.Entities>
+                            {dataItem.data.map((item) => (
+                                <Card.Item key={item.docId} item={item}>
+                                    <Card.Image
+                                        src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                                    />
+                                    <Card.Meta>
+                                        <Card.SubTitle>
+                                            {item.title}
+                                        </Card.SubTitle>
+                                        <Card.Text>
+                                            {item.description}
+                                        </Card.Text>
+                                    </Card.Meta>
+                                </Card.Item>
+                            ))}
+                        </Card.Entities>
+                        <Card.Feature category={category} />
+                    </Card>
+                ))}
+            </Card.Group>
+
             <FooterContainer />
         </>
     ) : (

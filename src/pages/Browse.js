@@ -7,8 +7,8 @@ const Browse = () => {
     const { series } = useContent('series');
     const { films } = useContent('films');
     const data = genreMap(series, films);
-    console.log(data);
-    return <BrowseContainer />;
+
+    return <BrowseContainer data={data} />;
 };
 
 export default Browse;
