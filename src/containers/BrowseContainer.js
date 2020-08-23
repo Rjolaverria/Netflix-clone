@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Fuse from 'fuse.js';
 import { Header, Loading, Card } from '../components';
 import { HOME } from '../constants/routes';
 import FirebaseContext from '../context/firebase';
@@ -27,6 +28,25 @@ const BrowseContainer = ({ data }) => {
     useEffect(() => {
         setDataRows(data[category]);
     }, [data, category]);
+
+    useEffect(() => {
+        const fuse = new Fuse(dataRows, {
+            keys: ['data.description', 'data.title', 'data.genre'],
+        });
+        const results = fuse.search(searchTerm).map(({ item }) => item);
+
+        console.log(results);
+
+        if (
+            dataRows.length > 0 &&
+            searchTerm.length > 3 &&
+            results.length > 0
+        ) {
+            setDataRows(results);
+        } else {
+            setDataRows(data[category]);
+        }
+    }, [searchTerm]);
 
     return profile.displayName ? (
         <>
