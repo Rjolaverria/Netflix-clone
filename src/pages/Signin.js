@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+import { useAuth } from '../hooks';
 import FirebaseContext from '../context/firebase';
 import FooterContainer from '../containers/FooterContainer';
 import { Header, Form } from '../components';
@@ -12,6 +13,7 @@ const SignIn = () => {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { user } = useAuth();
 
     const handleSignin = (e) => {
         e.preventDefault();
@@ -19,9 +21,6 @@ const SignIn = () => {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
-                setEmail('');
-                setPassword('');
-                setError('');
                 history.push(BROWSE);
             })
             .catch((error) => {
@@ -29,6 +28,10 @@ const SignIn = () => {
                 setTimeout(() => setError(''), 5000);
             });
     };
+
+    if (user) {
+        return <Redirect to={BROWSE} />;
+    }
 
     return (
         <>

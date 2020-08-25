@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+import { useAuth } from '../hooks';
 import FirebaseContext from '../context/firebase';
 import FooterContainer from '../containers/FooterContainer';
 import { Header, Form } from '../components';
@@ -12,6 +13,7 @@ const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { user } = useAuth();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -26,9 +28,6 @@ const SignUp = () => {
                         photoURL: Math.floor(Math.random() * 5) + 1,
                     })
                     .then(() => {
-                        setEmail('');
-                        setPassword('');
-                        setError('');
                         history.push(BROWSE);
                     })
             )
@@ -37,6 +36,10 @@ const SignUp = () => {
                 setTimeout(() => setError(''), 5000);
             });
     };
+
+    if (user) {
+        return <Redirect to={BROWSE} />;
+    }
 
     return (
         <>

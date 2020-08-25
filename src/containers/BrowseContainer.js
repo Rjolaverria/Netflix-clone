@@ -1,23 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import { Header, Loading, Card, Player } from '../components';
-import { HOME } from '../constants/routes';
+import { HOME, SIGN_IN } from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import ProfileContainer from './ProfileContainer';
 import FooterContainer from './FooterContainer';
+import { useAuth } from '../hooks';
+import { Redirect } from 'react-router-dom';
 
 const BrowseContainer = ({ data }) => {
     const { firebase } = useContext(FirebaseContext);
+    const { user } = useAuth();
     const [category, setCategory] = useState('series');
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [dataRows, setDataRows] = useState([]);
-
-    const user = {
-        displayName: 'Rafi',
-        photoURL: '2',
-    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -35,8 +33,6 @@ const BrowseContainer = ({ data }) => {
         });
         const results = fuse.search(searchTerm).map(({ item }) => item);
 
-        console.log(results);
-
         if (
             dataRows.length > 0 &&
             searchTerm.length > 3 &&
@@ -47,6 +43,10 @@ const BrowseContainer = ({ data }) => {
             setDataRows(data[category]);
         }
     }, [searchTerm]);
+
+    if (!user) {
+        return <Redirect to={SIGN_IN} />;
+    }
 
     return profile.displayName ? (
         <>

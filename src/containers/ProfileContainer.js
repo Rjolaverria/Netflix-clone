@@ -24,8 +24,8 @@ const ProfileContainer = ({ user: { displayName, photoURL }, setProfile }) => (
                         })
                     }
                 >
-                    <Profiles.Picture src={1} />
-                    <Profiles.Name>Rafi</Profiles.Name>
+                    <Profiles.Picture src={photoURL} />
+                    <Profiles.Name>{displayName}</Profiles.Name>
                 </Profiles.User>
             </Profiles.List>
         </Profiles>
