@@ -19,6 +19,7 @@ export default function useAuth() {
         });
 
         return () => listener();
+        // eslint-disable-next-line
     }, []);
 
     return { user };

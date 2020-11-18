@@ -42,6 +42,7 @@ const BrowseContainer = ({ data }) => {
         } else {
             setDataRows(data[category]);
         }
+        // eslint-disable-next-line
     }, [searchTerm]);
 
     if (!user) {
