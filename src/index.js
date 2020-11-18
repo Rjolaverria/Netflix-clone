@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === 'development'){
         measurementId: process.env.MEASUREMENT_ID,
     }
 }
+console.log(firebaseConfig)
 
 firebase.initializeApp(firebaseConfig);
 
