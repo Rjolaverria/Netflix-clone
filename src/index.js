@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development'){
     firebaseConfig = require('./firebaseConfig').default
 } else if (process.env.NODE_ENV === 'production'){
     firebaseConfig = {
-        apiKey: process.env.API_KEY,
+        apiKey: process.env.REACT_APP_API_KEY,
         authDomain: process.env.AUTH_DOMAIN,
         databaseURL: process.env.DATABASE_URL,
         projectId: process.env.PROJECT_ID,
